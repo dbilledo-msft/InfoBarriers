@@ -1,6 +1,6 @@
 # Install-Module -Name  ExchangeOnlineManagement
 Import-Module ExchangeOnlineManagement
-Connect-IPPSSession -UserPrincipalName admin@M365xXXXXXX.onmicrosoft.com
+Connect-IPPSSession -UserPrincipalName admin@M365x410135.onmicrosoft.com
 
 # Install-Module -Name Az
 Import-Module -Name Az
@@ -24,3 +24,9 @@ New-InformationBarrierPolicy -Name "Marketing-to-Retail" -AssignedSegment "Marke
 
 #Start IB policy engine
 Start-InformationBarrierPoliciesApplication
+
+#Get list of segments and their GUIDs
+Get-OrganizationSegment | ft Name, EXOSegmentID
+
+#Associate segment with SPO site after enabling in tenant
+Set-Sposite -Identity <site URL> -AddInformationSegment <segment GUID>
